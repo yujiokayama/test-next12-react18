@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
@@ -11,7 +11,7 @@ type Props = {
   fallbackData: TestApiResponseType[];
 };
 
-const Post: NextPage<Props> = ({ fallbackData }) => {
+const Ssr: NextPage<Props> = ({ fallbackData }) => {
   /**
    * @description useSWR のカスタムフック
    * getStaticProps からの fallbackDataを初期値に持つ。
@@ -29,6 +29,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
       <main className={styles.main}>
         <Navigation />
+        <h1 className={styles.title}>SSR</h1>
         <ul>
           {data?.map((item) => (
             <li key={item.id}>
@@ -43,7 +44,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   if (typeof process.env.API_URL_ROOT === 'undefined') {
     return {
       props: {
@@ -60,4 +61,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Post;
+export default Ssr;

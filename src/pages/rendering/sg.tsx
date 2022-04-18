@@ -11,7 +11,7 @@ type Props = {
   fallbackData: TestApiResponseType[];
 };
 
-const Post: NextPage<Props> = ({ fallbackData }) => {
+const Sg: NextPage<Props> = ({ fallbackData }) => {
   /**
    * @description useSWR のカスタムフック
    * getStaticProps からの fallbackDataを初期値に持つ。
@@ -29,6 +29,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
       <main className={styles.main}>
         <Navigation />
+        <h1 className={styles.title}>SG</h1>
         <ul>
           {data?.map((item) => (
             <li key={item.id}>
@@ -60,4 +61,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Post;
+export default Sg;

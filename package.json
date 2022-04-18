@@ -6,8 +6,9 @@
     "dev": "run-p dev:*",
     "dev:next": "next dev",
     "dev:path": "yarn path -w",
+    "path": "pathpida -o ./src/lib",
     "build": "yarn path && next build",
-    "path": "pathpida -o ./src/lib"
+    "clean": "rimraf .next out"
   },
   "dependencies": {
     "axios": "^0.26.1",

@@ -6,7 +6,16 @@ const Navigation: React.VFC = () => {
     <>
       <ul>
         <li>
+          <Link href={`/`}>home</Link>
+        </li>
+        <li>
           <Link href={`/posts`}>posts</Link>
+        </li>
+        <li>
+          <Link href={`/rendering/sg`}>sg</Link>
+        </li>
+        <li>
+          <Link href={`/rendering/ssr`}>ssr</Link>
         </li>
       </ul>
     </>

@@ -9,7 +9,7 @@ export const fetcher = async (url: string): Promise<TestApiResponseType[]> => {
   const response = await axios.get(url, {
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': 'hQqZxpkTQb9kGssNGhPVQ2dX3NE9gw6f6RPM2mC3',
+      'X-Api-Key': process.env.X_API_KEY as string
     },
   });
 

@@ -5,6 +5,14 @@ export const pagesPath = {
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/posts' as const, hash: url?.hash })
   },
+  "rendering": {
+    "sg": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/rendering/sg' as const, hash: url?.hash })
+    },
+    "ssr": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/rendering/ssr' as const, hash: url?.hash })
+    }
+  },
   $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
 }
 

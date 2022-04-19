@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:next": "next dev",
-    "dev:path": "yarn path -w",
+    "dev:path": "pathpida --enableStatic --watch",
+    "build": "pathpida --enableStatic && next build",
+    "start": "next start",
+    "serve": "serve out",
     "path": "pathpida -o ./src/lib",
-    "build": "yarn path && next build",
     "clean": "rimraf .next out"
   },
   "dependencies": {

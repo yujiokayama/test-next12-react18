@@ -1,21 +1,22 @@
 import Link from 'next/link';
 import * as React from 'react';
+import { pagesPath } from '@/lib/$path';
 
 const Navigation: React.VFC = () => {
   return (
     <>
       <ul>
         <li>
-          <Link href={`/`}>home</Link>
+          <Link href={`${pagesPath.$url().pathname}`}>home</Link>
         </li>
         <li>
-          <Link href={`/posts`}>posts</Link>
+          <Link href={`${pagesPath.posts.$url().pathname}`}>posts</Link>
         </li>
         <li>
-          <Link href={`/rendering/sg`}>sg</Link>
+          <Link href={`${pagesPath.rendering.sg.$url().pathname}`}>sg</Link>
         </li>
         <li>
-          <Link href={`/rendering/ssr`}>ssr</Link>
+          <Link href={`${pagesPath.rendering.ssr.$url().pathname}`}>ssr</Link>
         </li>
       </ul>
     </>

@@ -17,3 +17,10 @@ export const pagesPath = {
 }
 
 export type PagesPath = typeof pagesPath
+
+export const staticPath = {
+  favicon_ico: '/favicon.ico',
+  vercel_svg: '/vercel.svg'
+} as const
+
+export type StaticPath = typeof staticPath

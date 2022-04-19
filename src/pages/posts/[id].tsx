@@ -34,7 +34,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const API_URL = process.env.API_URL_ROOT;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL_ROOT;
   if (typeof API_URL === 'undefined') {
     return {
       props: {
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const paths = (await fetcher(process.env.API_URL_ROOT as string)).map(
+  const paths = (await fetcher(process.env.NEXT_PUBLIC_API_URL_ROOT as string)).map(
     ({ id }) => {
       return {
         params: {

@@ -7,9 +7,9 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  if (typeof process.env.API_URL_ROOT === 'undefined') return;
+  if (typeof process.env.NEXT_PUBLIC_API_URL_ROOT === 'undefined') return;
 
-  const data = await fetcher(process.env.API_URL_ROOT);
+  const data = await fetcher(process.env.NEXT_PUBLIC_API_URL_ROOT);
   res.end(JSON.stringify(data));
 };
 

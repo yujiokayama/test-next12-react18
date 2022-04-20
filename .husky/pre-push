@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+#push前にtestと型チェックを実行する
+yarn test & yarn type-check

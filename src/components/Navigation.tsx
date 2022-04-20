@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import * as React from 'react';
-import { pagesPath } from '@/lib/$path';
+import Link from 'next/link'
+import * as React from 'react'
+
+import { pagesPath } from '@/lib/$path'
 
 const Navigation: React.VFC = () => {
   return (
@@ -20,7 +21,7 @@ const Navigation: React.VFC = () => {
         </li>
       </ul>
     </>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

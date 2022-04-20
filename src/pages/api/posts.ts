@@ -1,16 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { fetcher } from '@/lib/fetcher';
+import { fetcher } from '@/lib/fetcher'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
-  if (typeof process.env.NEXT_PUBLIC_API_URL_ROOT === 'undefined') return;
+  if (typeof process.env.NEXT_PUBLIC_API_URL_ROOT === 'undefined') return
 
-  const data = await fetcher(process.env.NEXT_PUBLIC_API_URL_ROOT);
-  res.end(JSON.stringify(data));
-};
+  const data = await fetcher(process.env.NEXT_PUBLIC_API_URL_ROOT)
+  res.end(JSON.stringify(data))
+}
 
-export default handler;
+export default handler

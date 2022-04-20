@@ -18,4 +18,4 @@ module.exports = {
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
   },
   moduleDirectories: ['node_modules', 'src'],
-};
+}

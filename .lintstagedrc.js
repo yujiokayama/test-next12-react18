@@ -1,5 +1,5 @@
 // .lintstagedrc.js
-const lintStagedConifg = {
+module.exports = {
   'src/**/*.{js,jsx,ts,tsx}': [
     (filenames) =>
       `next lint --fix --file ${filenames
@@ -7,6 +7,4 @@ const lintStagedConifg = {
         .join(' --file ')}`,
     'prettier --write',
   ],
-};
-
-export default lintStagedConifg;
+}

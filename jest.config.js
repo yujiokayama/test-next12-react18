@@ -1,21 +1,21 @@
-module.exports = {
-  roots: ['<rootDir>'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
-  testPathIgnorePatterns: [
-    '<rootDir>[/\\\\](node_modules|.next)[/\\\\]',
-    '<rootDir>/test/Storyshots.test.ts',
-  ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
-  transform: {
-    '^.+\\.(js|ts|tsx)$': 'babel-jest',
-  },
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  // next.config.jsとテスト環境用の.envファイルが配置されたディレクトリをセット。基本は"./"で良い。
+  dir: './',
+})
+
+// Jestのカスタム設定を設置する場所。従来のプロパティはここで定義。
+const customJestConfig = {
+  // jest.setup.jsを作成する場合のみ定義。
+  // setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
-    '\\.(styl|css|less|scss)$': '<rootDir>/test/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
+    // aliaseを定義（tsconfig.jsonのcompilerOptions>pathsの定義に合わせる）
+    '^@/components/(.*)$': '<rootDir>/src/components/$1',
+    '^@/pages/(.*)$': '<rootDir>/src/pages/$1',
   },
-  moduleDirectories: ['node_modules', 'src'],
+  testEnvironment: 'jest-environment-jsdom',
 }
+
+// createJestConfigを定義することによって、本ファイルで定義された設定がNext.jsの設定に反映される
+module.exports = createJestConfig(customJestConfig)

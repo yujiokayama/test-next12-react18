@@ -12,8 +12,9 @@
 /.next/
 /out/
 
-# production
+# output
 /build
+/storybook-static
 
 # misc
 .DS_Store

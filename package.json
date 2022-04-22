@@ -28,6 +28,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.9.2",
+    "@emotion/react": "^11.9.0",
     "axios": "^0.26.1",
     "http-proxy-middleware": "^2.0.4",
     "next": "12.1.4",

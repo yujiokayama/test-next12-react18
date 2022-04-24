@@ -17,5 +17,5 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
 }
 
-// createJestConfigを定義することによって、本ファイルで定義された設定がNext.jsの設定に反映される
+// createJestConfigを定義することによって、jest.config.jsで定義された設定がNext.jsの設定に反映される
 module.exports = createJestConfig(customJestConfig)

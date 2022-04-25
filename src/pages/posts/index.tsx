@@ -4,8 +4,7 @@ import Link from 'next/link'
 
 import Navigation from '@/components/Navigation'
 import { usePostSWR } from '@/hooks/usePostSWR'
-import { fetcher } from '@/lib/fetcher'
-// import Image from 'next/image';
+import { createPost, deletePost, fetcher } from '@/lib/fetcher'
 import styles from '@/styles/Home.module.css'
 
 type Props = {
@@ -30,10 +29,32 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
       <main className={styles.main}>
         <Navigation />
+        <b>create new user</b>
+        <button
+          onClick={() =>
+            createPost(process.env.NEXT_PUBLIC_API_URL_ROOT as string, {
+              title: '001',
+              content: 'contents of 001',
+            })
+          }
+        >
+          create
+        </button>
         <ul>
           {data?.map((item) => (
             <li key={item.id}>
               <Link href={`/posts/${item.id}`}>{item.title}</Link>
+              <button>edit</button>
+              <button
+                onClick={() =>
+                  deletePost(
+                    process.env.NEXT_PUBLIC_API_URL_ROOT as string,
+                    `${item.id}`,
+                  )
+                }
+              >
+                delete
+              </button>
             </li>
           ))}
         </ul>

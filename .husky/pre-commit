@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # コミット前にstageにあるファイルに対してlintとformatを実行する
-yarn lint-staged
+# yarn lint-staged

@@ -25,7 +25,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
       <main className={styles.main}>
         <Navigation />
-        <h1 className={styles.title}>{fallbackData.id}</h1>
+        <h1 className={styles.title}>{fallbackData.title}</h1>
         <p>{fallbackData.content}</p>
       </main>
 

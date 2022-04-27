@@ -1,10 +1,11 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import React, { useState } from 'react'
 
 import Navigation from '@/components/Navigation'
 import { usePostSWR } from '@/hooks/usePostSWR'
-import { createPost, deletePost, fetcher } from '@/lib/fetcher'
+import { createPost, deletePost, editPost, fetcher } from '@/lib/fetcher'
 import styles from '@/styles/Home.module.css'
 
 type Props = {
@@ -12,12 +13,59 @@ type Props = {
 }
 
 const Post: NextPage<Props> = ({ fallbackData }) => {
+  const API_URL_ROOT = process.env.NEXT_PUBLIC_API_URL_ROOT as string
+  const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [editTarget, setEditTarget] = useState<TestApiResponseType>()
+  const [title, setTitle] = useState<string>('')
+  const [content, setContent] = useState<string>('')
+  const [titleEdit, setTitleEdit] = useState<string>('')
+  const [contentEdit, setContentEdit] = useState<string>('')
+
   /**
    * @description useSWR のカスタムフック
    * getStaticProps からの fallbackDataを初期値に持つ。
    * クライアント側でのデータフェッチを行う。
    */
   const { data } = usePostSWR(fallbackData)
+
+  const handleSetIsEdit = (post: TestApiResponseType) => {
+    setIsEdit(true)
+    setEditTarget(post)
+    setTitleEdit(post.title)
+    setContentEdit(post.content)
+  }
+
+  const handleSetTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value)
+  }
+  const handleSetContent = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContent(event.target.value)
+  }
+  const handleCreatePost = () => {
+    createPost(API_URL_ROOT, {
+      title,
+      content,
+    })
+    setTitle('')
+    setContent('')
+  }
+
+  const handleDecision = () => {
+    editPost(`${API_URL_ROOT}${editTarget?.id}`, {
+      title: contentEdit,
+      content: contentEdit,
+    })
+    setIsEdit(false)
+  }
+  const handleCancel = () => {
+    setIsEdit(false)
+  }
+  const handleSetTitleEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitleEdit(event.target.value)
+  }
+  const handleSetContentEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContentEdit(event.target.value)
+  }
 
   return (
     <div className={styles.container}>
@@ -29,35 +77,65 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
       <main className={styles.main}>
         <Navigation />
-        <b>create new user</b>
-        <button
-          onClick={() =>
-            createPost(process.env.NEXT_PUBLIC_API_URL_ROOT as string, {
-              title: '001',
-              content: 'contents of 001',
-            })
-          }
-        >
-          create
-        </button>
+        <b>create new post</b>
+        <div>
+          title
+          <input type="text" value={title} onChange={handleSetTitle} />
+        </div>
+        <div>
+          content
+          <input type="text" value={content} onChange={handleSetContent} />
+        </div>
+
+        <button onClick={handleCreatePost}>create</button>
         <ul>
           {data?.map((item) => (
             <li key={item.id}>
               <Link href={`/posts/${item.id}`}>{item.title}</Link>
-              <button>edit</button>
               <button
                 onClick={() =>
-                  deletePost(
-                    process.env.NEXT_PUBLIC_API_URL_ROOT as string,
-                    `${item.id}`,
-                  )
+                  handleSetIsEdit({
+                    id: item.id,
+                    title: item.title,
+                    content: item.content,
+                  })
                 }
               >
+                edit
+              </button>
+              <button onClick={() => deletePost(`${API_URL_ROOT}${item.id}`)}>
                 delete
               </button>
             </li>
           ))}
         </ul>
+        {isEdit && (
+          <>
+            Editing {editTarget?.title}
+            <div>
+              title:
+              <input
+                type="text"
+                name="titleEdit"
+                id=""
+                value={titleEdit}
+                onChange={handleSetTitleEdit}
+              />
+            </div>
+            <div>
+              content:
+              <input
+                type="text"
+                name="contentEdit"
+                id=""
+                value={contentEdit}
+                onChange={handleSetContentEdit}
+              />
+            </div>
+            <button onClick={() => handleDecision()}>決定</button>
+            <button onClick={() => handleCancel()}>キャンセル</button>
+          </>
+        )}
       </main>
 
       <footer className={styles.footer} />

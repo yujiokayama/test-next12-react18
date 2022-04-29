@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Navigation from '@/components/Navigation'
 import { usePostSWR } from '@/hooks/usePostSWR'
-import { fetcher } from '@/lib/fetcher'
+import { fetcher } from '@/lib/apiRequest'
 import styles from '@/styles/Home.module.css'
 
 type Props = {

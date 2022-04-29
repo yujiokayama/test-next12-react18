@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 import Navigation from '@/components/Navigation'
 import { usePostSWR } from '@/hooks/usePostSWR'
-import { createPost, deletePost, editPost, fetcher } from '@/lib/fetcher'
+import { createPost, deletePost, editPost, fetcher } from '@/lib/apiRequest'
 import styles from '@/styles/Home.module.css'
 
 type Props = {
@@ -27,6 +27,8 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
    * クライアント側でのデータフェッチを行う。
    */
   const { data } = usePostSWR(fallbackData)
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const sortData = data?.sort((a, b) => (a.date! < b.date! ? 1 : -1))
 
   const handleSetIsEdit = (post: TestApiResponseType) => {
     setIsEdit(true)
@@ -42,6 +44,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
     setContent(event.target.value)
   }
   const handleCreatePost = () => {
+    if (title === '' || content === '') return
     createPost(API_URL_ROOT, {
       title,
       content,
@@ -89,7 +92,7 @@ const Post: NextPage<Props> = ({ fallbackData }) => {
 
         <button onClick={handleCreatePost}>create</button>
         <ul>
-          {data?.map((item) => (
+          {sortData?.map((item) => (
             <li key={item.id}>
               <Link href={`/posts/${item.id}`}>{item.title}</Link>
               <button
@@ -154,6 +157,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   const data = await fetcher(API_URL_ROOT)
+
   return {
     props: {
       fallbackData: data,

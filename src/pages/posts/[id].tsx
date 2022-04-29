@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 
 import Navigation from '@/components/Navigation'
-import { fetcher } from '@/lib/fetcher'
+import { fetcher } from '@/lib/apiRequest'
 import styles from '@/styles/Home.module.css'
 
 type Props = {

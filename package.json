@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "run-p dev:*",
-    "dev:next": "next dev",
+    "dev:next": "next dev -p 3000",
     "dev:path": "pathpida --enableStatic --watch",
     "build": "pathpida --enableStatic && next build",
     "start": "next start",

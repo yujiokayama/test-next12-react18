@@ -1,7 +1,6 @@
 import useSWR, { SWRResponse } from 'swr'
 
-import { fetcher } from '@/lib/fetcher'
-
+import { fetcher } from '@/lib/apiRequest'
 
 export const usePostSWR = (
   fallbackData: TestApiResponseType[],
@@ -11,4 +10,3 @@ export const usePostSWR = (
     refreshInterval: 0,
   })
 }
-
